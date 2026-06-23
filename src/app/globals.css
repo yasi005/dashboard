@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --void: #080808;
+  --surface: #141414;
+  --groove: #242424;
+  --amber: #F59E0B;
+  --copper: #D97706;
+  --alabaster: #E4E4E7;
+  --muted: color-mix(in srgb, var(--alabaster) 45%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-void: var(--void);
+  --color-surface: var(--surface);
+  --color-groove: var(--groove);
+  --color-amber: var(--amber);
+  --color-copper: var(--copper);
+  --color-alabaster: var(--alabaster);
+  --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes amber-scan {
+  100% {
+    transform: translateX(100%);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--void);
+  color: var(--alabaster);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Tiptap editor reset */
+.ProseMirror {
+  margin: 0;
+  padding: 0;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+.ProseMirror p {
+  margin: 0;
+}
+
+/* Minimum 44×44px touch targets on mobile */
+@media (max-width: 1023px) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
