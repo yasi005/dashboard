@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  BarChart3,
   Calendar,
   CreditCard,
   LayoutDashboard,
   PenLine,
+  ScrollText,
   Cog,
   Zap,
 } from "lucide-react";
@@ -60,12 +62,12 @@ export function CommandPalette() {
   const triggerGeneration = () => {
     if (!currentSource?.trim()) {
       setOpen(false);
-      router.push("/dashboard");
+      router.push("/dashboard/sandbox");
       return;
     }
     setOpen(false);
     setGenerating(true);
-    router.push("/dashboard");
+    router.push("/dashboard/sandbox");
     setTimeout(() => startGeneration(), 100);
   };
 
@@ -76,19 +78,24 @@ export function CommandPalette() {
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Navigation">
           <CommandItem onSelect={() => navigate("/dashboard")}>
+            <BarChart3 />
+            Console Dashboard
+          </CommandItem>
+          <CommandItem onSelect={() => navigate("/dashboard/sandbox")}>
             <LayoutDashboard />
             Content Sandbox
-            <CommandShortcut>⌘1</CommandShortcut>
+          </CommandItem>
+          <CommandItem onSelect={() => navigate("/dashboard/logs")}>
+            <ScrollText />
+            Agent Logs
           </CommandItem>
           <CommandItem onSelect={() => navigate("/dashboard/editor", "omni-editor")}>
             <PenLine />
-            Multi-Column Editor
-            <CommandShortcut>⌘2</CommandShortcut>
+            Omni-Channel Editor
           </CommandItem>
           <CommandItem onSelect={() => navigate("/dashboard/calendar")}>
             <Calendar />
             Content Calendar
-            <CommandShortcut>⌘3</CommandShortcut>
           </CommandItem>
           <CommandItem onSelect={() => navigate("/dashboard/billing")}>
             <CreditCard />

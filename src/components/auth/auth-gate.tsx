@@ -21,6 +21,10 @@ export function setAuthenticated() {
   localStorage.setItem(AUTH_KEY, "true");
 }
 
+export function clearAuth() {
+  localStorage.removeItem(AUTH_KEY);
+}
+
 export function isAuthenticated(): boolean {
   if (typeof window === "undefined") return false;
   return !!localStorage.getItem(AUTH_KEY);
