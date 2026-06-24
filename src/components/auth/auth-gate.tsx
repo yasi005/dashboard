@@ -17,8 +17,8 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-export function setAuthenticated() {
-  localStorage.setItem(AUTH_KEY, "true");
+export function setAuthenticated(username?: string) {
+  localStorage.setItem(AUTH_KEY, username ?? "true");
 }
 
 export function clearAuth() {

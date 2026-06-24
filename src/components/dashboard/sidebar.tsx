@@ -41,7 +41,7 @@ export function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 z-40 hidden lg:flex h-screen w-64 flex-col border-r border-[#242424] bg-[#141414]/95 backdrop-blur-md">
       <Link
-        href="/dashboard"
+        href="/"
         className="flex h-16 items-center gap-2 border-b border-[#242424] px-4 hover:bg-[#080808]/50 transition-colors"
       >
         <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#242424] bg-[#080808] font-mono text-sm font-bold text-[#F59E0B]">

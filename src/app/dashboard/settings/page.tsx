@@ -1,12 +1,21 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { clearAuth } from "@/components/auth/auth-gate";
 import { useRouter } from "next/navigation";
 
+const AUTH_KEY = "echosaas-auth";
+
 export default function SettingsPage() {
   const router = useRouter();
+  const [operator, setOperator] = useState("guest_dev");
+
+  useEffect(() => {
+    const session = localStorage.getItem(AUTH_KEY);
+    if (session && session !== "true") setOperator(session);
+  }, []);
 
   const handleLogout = () => {
     clearAuth();
@@ -27,7 +36,7 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="rounded-lg border border-[#242424] bg-[#080808] p-3 font-mono text-xs text-[#E4E4E7]/60">
-            operator@echosaas.io · Pro Plan
+            operator: {operator} · Pro Plan · session active
           </div>
           <Button variant="secondary" onClick={handleLogout} className="w-full touch-target">
             Log Out
