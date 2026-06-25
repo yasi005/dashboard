@@ -169,24 +169,26 @@ export default function EditorPage() {
         <AutosaveIndicator />
       </div>
 
-      <MobileEditorTabs tabs={mobileTabs}>
-        {(activeId) => {
-          const col = columns.find((c) => c.key === activeId);
-          if (!col) return null;
-          return (
-            <div className="rounded-xl border border-[#242424] bg-[#141414] overflow-hidden min-h-[400px]">
-              {renderColumnContent(col)}
-            </div>
-          );
-        }}
-      </MobileEditorTabs>
+      <div id="omniEditorView" className="space-y-4">
+        <MobileEditorTabs tabs={mobileTabs}>
+          {(activeId) => {
+            const col = columns.find((c) => c.key === activeId);
+            if (!col) return null;
+            return (
+              <div className="rounded-xl border border-[#242424] bg-[#141414] overflow-hidden min-h-[400px]">
+                {renderColumnContent(col)}
+              </div>
+            );
+          }}
+        </MobileEditorTabs>
 
-      <div className="hidden lg:grid gap-4 lg:grid-cols-3">
-        {columns.map((col, index) => (
-          <ElasticColumnWrapper key={col.key} index={index} total={total} className="p-0">
-            {renderColumnContent(col)}
-          </ElasticColumnWrapper>
-        ))}
+        <div className="hidden lg:grid gap-4 lg:grid-cols-3">
+          {columns.map((col, index) => (
+            <ElasticColumnWrapper key={col.key} index={index} total={total} className="p-0">
+              {renderColumnContent(col)}
+            </ElasticColumnWrapper>
+          ))}
+        </div>
       </div>
     </div>
   );

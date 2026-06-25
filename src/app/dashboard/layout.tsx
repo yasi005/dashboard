@@ -6,6 +6,7 @@ import { BottomNav } from "@/components/dashboard/bottom-nav";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { TopNavbar } from "@/components/dashboard/top-navbar";
 import { useSidebarWidth } from "@/hooks/useBreakpoint";
+import { BespokeTour } from "@/components/tour/bespoke-tour";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const sidebarWidth = useSidebarWidth();
@@ -27,6 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <main className="p-4 sm:p-6">{children}</main>
           </div>
           <BottomNav />
+          <BespokeTour />
         </div>
       </LayoutGroup>
     </AuthGate>

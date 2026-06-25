@@ -15,6 +15,7 @@ import { SourceMorphPanel } from "@/components/motion/source-morph-panel";
 import { useGenerationStream } from "@/hooks/useWebSocket";
 import { spring } from "@/lib/motion";
 import { useProjectStore } from "@/store/useProjectStore";
+import { useTourStore } from "@/store/useTourStore";
 
 const SANDBOX_TABS = [
   { value: "link", label: "Link Drop" },
@@ -27,7 +28,11 @@ export default function SandboxPage() {
   const { currentSource, isGenerating, selectedChannels } = useProjectStore();
 
   const { startGeneration } = useGenerationStream({
-    onComplete: () => router.push("/dashboard/editor"),
+    onComplete: () => {
+      if (!useTourStore.getState().active) {
+        router.push("/dashboard/editor");
+      }
+    },
   });
 
   const handleGenerate = () => {
@@ -50,7 +55,7 @@ export default function SandboxPage() {
 
           {!isGenerating ? (
             <motion.div layout transition={spring.structural} className="space-y-6">
-              <Card>
+              <Card className="scroll-mt-24">
                 <CardHeader>
                   <CardTitle>Source Material</CardTitle>
                   <CardDescription>Feed content into the repurposing engine.</CardDescription>

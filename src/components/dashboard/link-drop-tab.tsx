@@ -1,13 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link2, Loader2 } from "lucide-react";
+import { TOUR_DEMO_URL } from "@/lib/tour-config";
 import { useProjectStore } from "@/store/useProjectStore";
+import { useTourStore } from "@/store/useTourStore";
 
 export function LinkDropTab() {
   const [url, setUrl] = useState("");
   const [fetching, setFetching] = useState(false);
   const setSource = useProjectStore((s) => s.setSource);
+  const urlTypewriterToken = useTourStore((s) => s.urlTypewriterToken);
+
+  useEffect(() => {
+    if (urlTypewriterToken === 0) return;
+
+    let cancelled = false;
+
+    (async () => {
+      for (let i = 1; i <= TOUR_DEMO_URL.length; i++) {
+        if (cancelled) return;
+        const slice = TOUR_DEMO_URL.slice(0, i);
+        setUrl(slice);
+        setSource(slice, "link");
+        await new Promise((r) => setTimeout(r, 28));
+      }
+      window.dispatchEvent(new Event("echosaas-tour-typewriter-done"));
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [urlTypewriterToken, setSource]);
 
   const handleFetch = async () => {
     if (!url.trim()) return;
@@ -18,7 +42,7 @@ export function LinkDropTab() {
   };
 
   return (
-    <div className="space-y-4">
+    <div id="sandboxInputZone" className="space-y-4">
       <p className="text-sm text-[#E4E4E7]/55">
         Paste a YouTube, Medium, or blog URL — we&apos;ll fetch and parse automatically.
       </p>
@@ -26,6 +50,7 @@ export function LinkDropTab() {
         <div className="relative flex-1">
           <Link2 className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#E4E4E7]/40" />
           <input
+            id="sandbox-url-input"
             type="url"
             value={url}
             onChange={(e) => {

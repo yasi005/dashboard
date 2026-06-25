@@ -12,6 +12,7 @@ interface EditorColumnShellProps {
   onRefine?: () => void;
   onSchedule?: () => void;
   copyText: string;
+  refineButtonId?: string;
 }
 
 export function EditorColumnShell({
@@ -20,6 +21,7 @@ export function EditorColumnShell({
   onRefine,
   onSchedule,
   copyText,
+  refineButtonId,
 }: EditorColumnShellProps) {
   const config = PLATFORMS[platform];
 
@@ -33,7 +35,13 @@ export function EditorColumnShell({
       </div>
       <div className="flex-1 overflow-y-auto p-4">{children}</div>
       <div className="flex items-center gap-1 border-t border-[#242424] p-3">
-        <Button variant="ghost" size="sm" onClick={onRefine} className="touch-target min-h-[44px]">
+        <Button
+          id={refineButtonId}
+          variant="ghost"
+          size="sm"
+          onClick={onRefine}
+          className="touch-target min-h-[44px]"
+        >
           <RefreshCw className="h-4 w-4" />
           <span className="hidden sm:inline">Refine with AI</span>
         </Button>

@@ -20,7 +20,7 @@ export function GenerationLoader() {
   }, [telemetryLogs]);
 
   return (
-    <div className="space-y-6">
+    <div id="loggerBox" className="space-y-6">
       <div className="flex min-h-[40vh] items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">

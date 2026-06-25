@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Search, Wifi } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TourLaunchButton } from "@/components/tour/bespoke-tour";
 import { useProjectStore } from "@/store/useProjectStore";
 
 const breadcrumbs: Record<string, string> = {
@@ -40,6 +41,10 @@ export function TopNavbar({ onOpenCommand }: TopNavbarProps) {
             <span className="h-1.5 w-1.5 rounded-full bg-[#F59E0B] shadow-[0_0_6px_rgba(245,158,11,0.8)] animate-pulse" />
             PIPELINE
           </span>
+        )}
+
+        {(pathname === "/dashboard/sandbox" || pathname === "/dashboard/editor") && (
+          <TourLaunchButton />
         )}
 
         <span className="hidden md:flex items-center gap-1.5 rounded-md border border-[#242424] bg-[#080808] px-2.5 py-1 text-[10px] font-mono text-emerald-400">

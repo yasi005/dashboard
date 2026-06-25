@@ -29,6 +29,7 @@ export function TwitterColumn({ draft, onUpdateBlocks, onRefine, onSchedule }: T
       copyText={blocks.join("\n\n")}
       onRefine={onRefine}
       onSchedule={onSchedule}
+      refineButtonId="refineX"
     >
       <div className="space-y-4">
         {blocks.map((block, i) => {
@@ -44,6 +45,7 @@ export function TwitterColumn({ draft, onUpdateBlocks, onRefine, onSchedule }: T
                   Thread Block #{i + 1}
                 </span>
                 <span
+                  id={i === 0 ? "charCountX" : undefined}
                   className={cn(
                     "text-xs font-mono",
                     overLimit ? "text-red-400" : "text-[#E4E4E7]/45"
